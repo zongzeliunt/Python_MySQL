@@ -180,6 +180,39 @@ def breadth_first_search (root):
 		print "level: " + str(report_level) + ": " + report_tmp
 #}}}
 
+def convert_list_to_tree (a):
+#{{{
+    #a = [1,0,0,"null",3]
+    
+    root = node(a[0])
+    queue = [root]
+    i = 1 
+
+    while i < len(a):  
+        this_node = queue[0]
+        del(queue[0])
+        
+        this_num = a[i]
+        if not this_num == "null":
+            new_node = node(this_num)        
+            this_node.left = new_node
+            queue.append(new_node)
+
+        i += 1
+        if i == len(a):
+            break
+        
+        this_num = a[i]
+        if not this_num == "null":
+            new_node = node(this_num)        
+            this_node.right = new_node
+            queue.append(new_node)
+        i += 1
+
+    return root
+#}}}
+
+
 #AVL tree
 #	find_tree_depth
 #	rotate_right
