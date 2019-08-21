@@ -6,6 +6,7 @@ class node:
 		self.left = None
 		self.right = None
 		self.v = val
+		self.mark = 0
 
 def node_insert (root, val):
 	root_val = root.v
@@ -33,6 +34,21 @@ def in_order_search (root):
 
 
 def LDR (root):
+	stack = [root]
+	while not len(stack) == 0:
+		current = stack[0]
+		del(stack[0])
+		if current.mark == 0:
+			if not current.right == None:
+				stack = [current.right] + stack
+			current.mark = 1	
+			stack = [current] + stack
+			if not current.left == None:
+				stack = [current.left] + stack
+		else:
+			print current.v
+
+	"""
 	stack = []
 	current = root
 	while True:
@@ -47,6 +63,7 @@ def LDR (root):
 
 		if current == None and len(stack) == 0:
 			break
+	"""
 #}}}
 
 #pre_order
@@ -59,8 +76,23 @@ def pre_order_search (root):
 		pre_order_search (root.right)
 
 def DLR (root):
-	stack = []
+	stack = [root]
+	while not len(stack) == 0:
+		current = stack[0]
+		del(stack[0])
+		if current.mark == 0:
+			if not current.right == None:
+				stack = [current.right] + stack
+			if not current.left == None:
+				stack = [current.left] + stack
+			current.mark = 1	
+			stack = [current] + stack
+		else:
+			print current.v
+
+	"""
 	stack = [root] + stack
+
 	while not len(stack) == 0:
 		current = stack[0]
 		print current.v
@@ -69,6 +101,7 @@ def DLR (root):
 			stack = [current.right] + stack
 		if not current.left == None:
 			stack = [current.left] + stack
+	"""
 #}}}
 
 #post_order
@@ -81,6 +114,21 @@ def post_order_search (root):
 	print root.v
 
 def LRD (root):
+	stack = [root]
+	while not len(stack) == 0:
+		current = stack[0]
+		del(stack[0])
+		if current.mark == 0:
+			current.mark = 1	
+			stack = [current] + stack
+			if not current.right == None:
+				stack = [current.right] + stack
+			if not current.left == None:
+				stack = [current.left] + stack
+		else:
+			print current.v
+
+	"""
 	stack = []
 	current = root
 	r_push_list = []
@@ -100,6 +148,7 @@ def LRD (root):
 
 		if current == None and len(stack) == 0:
 			break
+	"""
 
 #}}}
 
@@ -190,18 +239,22 @@ def main ():
 	#print "tree_depth: " + str(find_tree_depth(root))
 	#AVL_tree_balance(root)
 
+	"""
 	breadth_first_search (root)
-	"""	
 	print "recursive:"
 	in_order_search(root)
 	print "LDR"
 	LDR(root)
 	"""	
-	"""	
+	"""
+	print "recursive:"
 	pre_order_search(root)
+	print "DLR"
 	DLR(root)
 	"""
+	print "recursive:"
 	post_order_search(root)
+	print "LRD"
 	LRD(root)
 
 
