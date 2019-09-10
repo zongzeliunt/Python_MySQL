@@ -1,0 +1,327 @@
+
+
+# coding=utf-8
+import wx
+import os
+ 
+# 示例1 简单展示
+ 
+ 
+# app = wx.App(False)
+# frame = wx.Frame(None, wx.ID_ANY, "Hello World")
+# frame.Show(True)
+# app.MainLoop()
+ 
+# 示例2 添加一个编辑框
+ 
+ 
+# class MyFrame(wx.Frame):
+#     """We simple derive a new class of Frame"""
+#     def __init__(self, parent, title, size):
+#         wx.Frame.__init__(self, parent, title=title, size=size)
+#         self.control = wx.TextCtrl(self, style=wx.TE_MULTILINE)  # 支持多行的编辑框
+#         self.Show(True)
+#
+# app = wx.App(False)
+# frame = MyFrame(None, '小型编辑器示例', (800, 600))
+# app.MainLoop()
+ 
+# 示例3 添加一个菜单栏和一个状态栏
+ 
+ 
+# class MainWindow(wx.Frame):
+#     def __init__(self, parent, title, size):
+#         wx.Frame.__init__(self, parent, title=title, size=size)
+#         self.control = wx.TextCtrl(self, style=wx.TE_MULTILINE)
+#         self.CreateStatusBar()  # 在窗口底部
+#         # 设置菜单
+#         filemenu = wx.Menu()
+#         #wx.ID_ABOUT 和 wx.ID_EXIT是由wxWidgets提供的标准标识符
+#         filemenu.Append(wx.ID_ABOUT, "&关于", "关于该程序的信息")
+#         filemenu.AppendSeparator()
+#         filemenu.Append(wx.ID_EXIT, "&退出", "退出程序")
+#         # 创建菜单栏
+#         menuBar = wx.MenuBar()
+#         menuBar.Append(filemenu, "&文件")
+#         self.SetMenuBar(menuBar)
+#         self.Show(True)
+#
+# app = wx.App(False)
+# frame = MainWindow(None, "菜单栏和状态栏示例", (800, 600))
+# app.MainLoop()
+ 
+# 示例4 绑定事件处理
+ 
+ 
+# class MainWindow(wx.Frame):
+#     def __init__(self, parent, title, size):
+#         wx.Frame.__init__(self, parent, title=title, size=size)
+#         self.control = wx.TextCtrl(self, style=wx.TE_MULTILINE)
+#         self.CreateStatusBar()  # 在窗口底部
+#         # 设置菜单
+#         filemenu = wx.Menu()
+#         # wx.ID_ABOUT 和 wx.ID_EXIT是由wxWidgets提供的标准标识符
+#         menuabout = filemenu.Append(wx.ID_ABOUT, "&关于", "关于该程序的信息")
+#         filemenu.AppendSeparator()
+#         menuexit = filemenu.Append(wx.ID_EXIT, "&退出", "退出程序")
+#         # 创建菜单栏
+#         menubar = wx.MenuBar()
+#         menubar.Append(filemenu, "&文件")
+#         self.SetMenuBar(menubar)
+#
+#         # 设置事件
+#         self.Bind(wx.EVT_MENU, self.onabout, menuabout)
+#         self.Bind(wx.EVT_MENU, self.onexit, menuexit)
+#
+#         self.Show(True)
+#
+#     def onabout(self, e):
+#         # 带有OK按钮的消息弹出框，wx.OK是一个wxWidgets的标准标识符
+#         dlg = wx.MessageDialog(self, "一个小型文本编辑器", "关于示例编辑器", wx.OK)
+#         dlg.ShowModal()  # 展示
+#         dlg.Destroy()  # 结束时销毁
+#
+#     def onexit(self, e):
+#         self.Close(True)  # 关闭Frame
+#
+# app = wx.App(False)
+# frame = MainWindow(None, "菜单栏和状态栏示例", (800, 600))
+# app.MainLoop()
+ 
+# 示例5 文件内容读取及窗口大小调整
+ 
+ 
+# class MainWindow(wx.Frame):
+#     def __init__(self, parent, title):
+#         self.dirname = ''
+#         self.filename = ''
+#
+#         # size里面的参数-1代表使用默认的高度
+#         # wx.Frame.__init__(self, parent, title=title, size=(800, -1))
+#         wx.Frame.__init__(self, parent, title=title, size=(800, 600))
+#         self.control = wx.TextCtrl(self, style=wx.TE_MULTILINE)
+#         self.CreateStatusBar()  # 在窗口底部
+#         # 设置菜单
+#         filemenu = wx.Menu()
+#         # wx.ID_ABOUT 和 wx.ID_EXIT是由wxWidgets提供的标准标识符
+#         menuopen = filemenu.Append(wx.ID_OPEN, "&打开", "打开一个文件以编辑")
+#         menuabout = filemenu.Append(wx.ID_ABOUT, "&关于", "关于该程序的信息")
+#         menuexit = filemenu.Append(wx.ID_EXIT, "&退出", "退出程序")
+#         # 创建菜单栏
+#         menubar = wx.MenuBar()
+#         menubar.Append(filemenu, "&文件")
+#         self.SetMenuBar(menubar)
+#
+#         # 设置事件
+#         self.Bind(wx.EVT_MENU, self.onopen, menuopen)
+#         self.Bind(wx.EVT_MENU, self.onabout, menuabout)
+#         self.Bind(wx.EVT_MENU, self.onexit, menuexit)
+#
+#         # 定义sizer，sizer并不是一个window，只是windows展示的一种方式
+#         self.sizer2 = wx.BoxSizer(wx.HORIZONTAL)
+#         self.buttons = []
+#         for i in range(0, 6):
+#             self.buttons.append(wx.Button(self, -1, "按钮 &"+str(i)))  # 此处-1是按钮标识符
+#             self.sizer2.Add(self.buttons[i], 1, wx.EXPAND)  # 此处1是按钮占用size比例，EXPAND是可扩充展开，换成wx.ALIGN_CENTER_HORIZONTAL(水平居中)试试
+#
+#         # 再用一个sizer，将文本编辑框空间和包含按钮的sizer2加入该sizer进行展示
+#         self.sizer = wx.BoxSizer(wx.VERTICAL)
+#         self.sizer.Add(self.control, 1, wx.EXPAND)  # 此处1是按钮占用size比例，改成3试试
+#         self.sizer.Add(self.sizer2, 0, wx.EXPAND)  # 此处0是按钮占用size比例，改成2试试
+#
+#         # sizer展示
+#         self.SetSizer(self.sizer)
+#         self.SetAutoLayout(1)
+#         # self.sizer.Fit(self)  # 此处不注掉的话就是自适应，自定义高度不起作用
+#         self.Show()
+#
+#     def onabout(self, e):
+#         # 带有OK按钮的消息提示框，wx.OK是一个wxWidgets的标准标识符
+#         dlg = wx.MessageDialog(self, "一个小型文本编辑器", "关于示例编辑器", wx.OK)
+#         dlg.ShowModal()  # 展示
+#         dlg.Destroy()  # 结束时销毁
+#
+#     def onexit(self, e):
+#         self.Close(True)  # 关闭Frame
+#
+#     def onopen(self, e):
+#         """打开一个文件"""
+#         dlg = wx.FileDialog(self, "选择一个文件", self.dirname, "", "*.txt", wx.ID_OPEN)
+#         if dlg.ShowModal() == wx.ID_OK:
+#             self.filename = dlg.GetFilename()
+#             self.dirname = dlg.GetDirectory()
+#             f = open(os.path.join(self.dirname, self.filename), 'r')
+#             self.control.SetValue(f.read())
+#             f.close()
+#         dlg.Destroy()
+#
+# app = wx.App(False)
+# frame = MainWindow(None, "编辑器示例")
+# app.MainLoop()
+ 
+# 示例6 对话框或表单校验器
+ 
+#
+# class ExamplePanel(wx.Panel):
+#     def __init__(self, parent):
+#         wx.Panel.__init__(self, parent)
+#         self.quote = wx.StaticText(self, label="面板示例:", pos=(20, 20))
+#
+#         # 展示事件是如何在程序中工作的一个多行文本框控件
+#         self.logger = wx.TextCtrl(self, pos=(300, 20), size=(200, 300), style=wx.TE_MULTILINE | wx.TE_READONLY)
+#
+#         # 一个按钮
+#         self.button = wx.Button(self, label="保存", pos=(200, 325))
+#         self.Bind(wx.EVT_BUTTON, self.Onclick, self.button)
+#
+#         # 编辑组件
+#         self.lblname = wx.StaticText(self, label="Your Name:", pos=(20, 60))
+#         self.editname = wx.TextCtrl(self, value="input your name", pos=(140, 60), size=(140, -1))
+#         self.Bind(wx.EVT_TEXT, self.EvtText, self.editname)
+#         self.Bind(wx.EVT_CHAR, self.EvtChar, self.editname)
+#
+#         # 组合框组件
+#         self.sampleList = ['friends', 'advertising', 'web search', 'Yellow Pages']
+#         self.lblhear = wx.StaticText(self, label="Select the topic ?", pos=(20, 90))
+#         self.edithear = wx.ComboBox(self, pos=(150, 90), size=(95, -1), choices=self.sampleList, style=wx.CB_DROPDOWN)
+#         self.Bind(wx.EVT_COMBOBOX, self.EvtComboBox, self.edithear)
+#         self.Bind(wx.EVT_TEXT, self.EvtText, self.edithear)
+#
+#         # 复选框
+#         self.insure = wx.CheckBox(self, label="Do you want Insured Shipment ?", pos=(20, 180))
+#         self.Bind(wx.EVT_CHECKBOX, self.EvtCheckBox, self.insure)
+#
+#         # 单选按钮
+#         radioList = ['blue', 'red', 'yellow', 'orange', 'green', 'purple', 'navy blue', 'black', 'gray']
+#         rb = wx.RadioBox(self, label="What color would you like ?", pos=(20, 210), choices=radioList, majorDimension=3,
+#                          style=wx.RA_SPECIFY_COLS)
+#         self.Bind(wx.EVT_RADIOBOX, self.EvtRadioBox, rb)
+#
+#     def EvtRadioBox(self, event):
+#         self.logger.AppendText('EvtRadioBox: %d\n' % event.GetInt())
+#     def EvtComboBox(self, event):
+#         self.logger.AppendText('EvtComboBox: %s\n' % event.GetString())
+#     def Onclick(self, event):
+#         self.logger.AppendText(' Click on object with Id %d\n' % event.GetId())
+#     def EvtText(self, event):
+#         self.logger.AppendText('EvtText: %s\n' % event.GetString())
+#     def EvtChar(self, event):
+#         self.logger.AppendText('EvtChar: %d\n' % event.GetKeyCode())
+#         event.Skip()
+#     def EvtCheckBox(self, event):
+#         self.logger.AppendText('EvtCheckBox: %d\n' % event.IsChecked())
+ 
+# app = wx.App(False)
+# frame = wx.Frame(None, size=(600, 400))
+# panel = ExamplePanel(frame)
+# frame.Show()
+# app.MainLoop()
+ 
+# 带有可切换导航的面板
+# app = wx.App(False)
+# frame = wx.Frame(None, title="NoteBook示例", size=(600, 400))
+# nb = wx.Notebook(frame)
+#
+# nb.AddPage(ExamplePanel(nb), "Absolute Positioning")
+# nb.AddPage(ExamplePanel(nb), "Page Two", True)
+# nb.AddPage(ExamplePanel(nb), "Page Three")
+# frame.Show()
+# app.MainLoop()
+ 
+# 示例6 用sizer重写以上示例，调整控件位置及大小布局
+ 
+ 
+class ExamplePanel(wx.Panel):
+    def __init__(self, parent):
+        wx.Panel.__init__(self, parent)
+ 
+        # 创建一些sizer
+        mainSizer = wx.BoxSizer(wx.VERTICAL)
+        grid = wx.GridBagSizer(vgap=5, hgap=5)  # 虚拟网格sizer，此处指定了行和列之间的间隙
+        hSizer = wx.BoxSizer(wx.HORIZONTAL)
+ 
+        self.quote = wx.StaticText(self, label="面板示例:", pos=(20, 20))
+        grid.Add(self.quote, pos=(0, 0))
+ 
+        # 展示事件是如何在程序中工作的一个多行文本框控件
+        self.logger = wx.TextCtrl(self, pos=(300, 20), size=(200, 300), style=wx.TE_MULTILINE | wx.TE_READONLY)
+ 
+        # 一个按钮
+        self.button = wx.Button(self, label="保存", pos=(200, 325))
+        self.Bind(wx.EVT_BUTTON, self.Onclick, self.button)
+ 
+        # 编辑组件
+        self.lblname = wx.StaticText(self, label="Your Name:", pos=(20, 60))
+        grid.Add(self.lblname, pos=(1, 0))
+        self.editname = wx.TextCtrl(self, value="input your name", pos=(140, 60), size=(140, -1))
+        grid.Add(self.editname, pos=(1, 1))
+        self.Bind(wx.EVT_TEXT, self.EvtText, self.editname)
+        self.Bind(wx.EVT_CHAR, self.EvtChar, self.editname)
+ 
+        # 组合框组件
+        self.sampleList = ['friends', 'advertising', 'web search', 'Yellow Pages']
+        self.lblhear = wx.StaticText(self, label="Select the topic ?", pos=(20, 90))
+        grid.Add(self.lblhear, pos=(3, 0))
+        self.edithear = wx.ComboBox(self, pos=(150, 90), size=(95, -1), choices=self.sampleList, style=wx.CB_DROPDOWN)
+        grid.Add(self.edithear, pos=(3, 1))
+        self.Bind(wx.EVT_COMBOBOX, self.EvtComboBox, self.edithear)
+        self.Bind(wx.EVT_TEXT, self.EvtText, self.edithear)
+ 
+        # 往sizer中添加一些空间
+        grid.Add((10, 40), pos=(2, 0))  # 此处设置了间隔物的宽高
+ 
+        # 复选框
+        self.insure = wx.CheckBox(self, label="Do you want Insured Shipment ?", pos=(20, 180))
+        grid.Add(self.insure, pos=(4, 0), span=(1, 2))
+        self.Bind(wx.EVT_CHECKBOX, self.EvtCheckBox, self.insure)
+ 
+        # 单选按钮
+        radioList = ['blue', 'red', 'yellow', 'orange', 'green', 'purple', 'navy blue', 'black', 'gray']
+        rb = wx.RadioBox(self, label="What color would you like ?", pos=(20, 210), choices=radioList, majorDimension=3,
+                         style=wx.RA_SPECIFY_COLS)
+        grid.Add(rb, pos=(5, 0), span=(1, 2))
+        self.Bind(wx.EVT_RADIOBOX, self.EvtRadioBox, rb)
+ 
+        hSizer.Add(grid, 0, wx.ALL, 5)
+        hSizer.Add(self.logger)
+        mainSizer.Add(hSizer, 0, wx.ALL, 5)
+        mainSizer.Add(self.button, 0, wx.CENTER)
+        self.SetSizerAndFit(mainSizer)
+ 
+    def EvtRadioBox(self, event):
+        self.logger.AppendText('EvtRadioBox: %d\n' % event.GetInt())
+    def EvtComboBox(self, event):
+        self.logger.AppendText('EvtComboBox: %s\n' % event.GetString())
+    def Onclick(self, event):
+        self.logger.AppendText(' Click on object with Id %d\n' % event.GetId())
+    def EvtText(self, event):
+        self.logger.AppendText('EvtText: %s\n' % event.GetString())
+    def EvtChar(self, event):
+        self.logger.AppendText('EvtChar: %d\n' % event.GetKeyCode())
+        event.Skip()
+    def EvtCheckBox(self, event):
+        self.logger.AppendText('EvtCheckBox: %d\n' % event.IsChecked())
+ 
+# 带有可切换导航的面板
+app = wx.App(False)
+frame = wx.Frame(None, title="NoteBook示例", size=(600, 400))
+nb = wx.Notebook(frame)
+ 
+nb.AddPage(ExamplePanel(nb), "Absolute Positioning")
+nb.AddPage(ExamplePanel(nb), "Page Two")
+nb.AddPage(ExamplePanel(nb), "Page Three")
+frame.Show()
+app.MainLoop()
+ 
+# 示例7 wxPython的debug
+ 
+ 
+# class MyApp (wx.App):
+# ...
+# ...
+# ...
+# myapp = MyApp() # Stdio直接输出到视窗
+# myapp = MyApp(0) # 栈追踪信息输出到控制台
+# myapp = MyApp(1, 'filespec') #输出到指定文件
+# NOTE: 这里用了一些参数名，是为了增加可读性
+# myapp = MyApp(redirect = 1, filename = 'filespec')  # 输出到指定文件
