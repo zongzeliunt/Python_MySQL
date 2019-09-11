@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 import wx
 import os
+import sys
+sys.path.append('./operations')
 import class_opts as co 
-
 
 class my_GUI(wx.Frame):
 	def __init__(self, parent, title):
 		self.dirname = ''
-		wx.Frame.__init__(self, parent, title = title, size = (400, 800))
+		wx.Frame.__init__(self, parent, title = title, size = (800, 600))
 		#1. overall box	
 		co.declare_overall_box(self)
 
@@ -20,6 +21,9 @@ class my_GUI(wx.Frame):
 	
 
 		co.add_stepcombobox(self)
+		co.add_stepcommandbox(self)
+		co.add_stepexplainbox(self)
+		co.add_stepstatusbox(self)
 
 
 		#co.declare_input_frame(self)
