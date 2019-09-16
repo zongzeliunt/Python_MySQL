@@ -21,6 +21,7 @@ class my_GUI(wx.Frame):
 	
 
 		co.add_stepcombobox(self)
+		co.add_steppathbox(self)
 		co.add_stepcommandbox(self)
 		co.add_stepexplainbox(self)
 		co.add_stepstatusbox(self)

@@ -94,12 +94,26 @@ def add_stepcombobox (self):
 def change_combobox_command(self, event):
 #{{{
 	combo_box_value = self.ch1.GetValue()
-	self.command_text.SetValue(step_commands[combo_box_value][0])
-	self.explain_text.SetValue(step_commands[combo_box_value][1])
+	self.path_text.SetValue(step_commands[combo_box_value][0])
+	self.command_text.SetValue(step_commands[combo_box_value][1])
+	self.explain_text.SetValue(step_commands[combo_box_value][2])
 
 	#print("select{0}".format(event.GetString()))
 #}}}
 	
+def add_steppathbox (self):
+#{{{
+	pathbox=wx.BoxSizer(wx.HORIZONTAL)
+
+	statictext=wx.StaticText(self,label='Step Path:')
+	pathbox.Add(statictext, 1, flag=wx.LEFT |wx.RIGHT|wx.FIXED_MINSIZE,border=5)
+
+	#self.path_text = wx.TextCtrl(self, -1, 'path', size=(HORI, -1), style=(wx.TE_MULTILINE | wx.TE_AUTO_SCROLL | wx.TE_DONTWRAP))
+	self.path_text = wx.TextCtrl(self, -1, 'path', size=(HORI, -1), style=(wx.TE_MULTILINE | wx.TE_AUTO_SCROLL))
+	pathbox.Add(self.path_text, 1, flag=wx.LEFT |wx.RIGHT|wx.FIXED_MINSIZE,border=5)	
+	self.box_sizer.Add(pathbox, 0, wx.ALIGN_LEFT)	
+#}}}
+
 def add_stepcommandbox (self):
 #{{{
 	commandbox=wx.BoxSizer(wx.HORIZONTAL)
@@ -141,17 +155,19 @@ def add_stepstatusbox (self):
 
 
 def exe_combobox_command(self, event):
+	path = self.path_text.GetValue()
 	command = self.command_text.GetValue()
 	step = self.ch1.GetValue()
 
+	#for python script debug, use exec
+	#exec(command)
 
-	exec(command)
-	#output = commands.getstatusoutput(command)  
-
-
-	result = 0
-
-
+	#for system execute
+	os.chdir(path)
+	print os.getcwd()
+	
+	result = os.system(command)
+	print result
 
 
 	if result == 0:
