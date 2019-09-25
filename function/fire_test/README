@@ -1,0 +1,19 @@
+This is a small case to test testbench1.py and testbench_base.py
+
+几种用法：
+1) ./testbench1.py show_name
+	返回：case 1
+	解释：最基础的用法，main里定义tb是base_class，这就是调用base_class 里的show_name函数
+		但是那个name是在testbench1定义的，应该是testbench_base继承了testbench1的变量
+
+2) ./testbench1.py powerunit print_value
+	返回：this is son class
+	解释：powerunit被声明成子类son_class了，这样就相当于call了powerunit的函数print_value了
+
+3）./testbench1.py external_print
+	返回：this is from external opt
+	解释：base_class本来没有external_print函数，但是有include_all_external_opts，在init时判断是不是有external_opts这个文件夹，如果有就把external_opts给import进来，并且引用external_print这个函数了
+	这样就可以使用external_opts这个namspace里的函数了
+	这个用法的好处是最小规模改变原有testbench_base的代码，只要加一个include_external_opts在init里就可以了
+	所有的外部函数都在一个单独的文件里修改，不会改动testbench_base了
+
