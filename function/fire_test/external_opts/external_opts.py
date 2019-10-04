@@ -1,7 +1,10 @@
-def include_all_external_opts(self):
-	self.external_print = external_print
+def external_show_init_value (self):
+	print ("this is external")	
+	print (self.value)
 
+def external_show_upper_name (self):
+	print ("this is external show upper name")
+	print (name)
 
-def external_print ():
-	print ("this is from external opt")
-
+def external_open_success():
+	print ("external_open_success")
