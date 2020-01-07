@@ -63,3 +63,18 @@ print f
 g= a.dot(b.T)
 print "g = a.dot(b.T)"
 print g
+
+print "==================================="
+print "third test"
+a = np.zeros( (1,3), int)
+a[0] = [1,2,3]
+
+b = np.tile(a, 2)
+print "a tile 2"
+print b
+
+c = np.tile(a, (2,2))
+print "a tile 2 * 2"
+print c
+
+
