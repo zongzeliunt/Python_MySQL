@@ -1,0 +1,5 @@
+http://www.atyun.com/18664.html
+
+http://zwgeek.com/2018/04/08/Tensorflow%E5%85%A5%E9%97%A8/
+http://www.tensorfly.cn/tfdoc/tutorials/mnist_beginners.html
+http://yann.lecun.com/exdb/mnist/
