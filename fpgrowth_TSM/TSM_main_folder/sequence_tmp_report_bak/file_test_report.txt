@@ -1,0 +1,573 @@
+testing: test_log_folder/0_c0-0c2s2n2.txt_block_report.txt
+==================================================
+	warning: sub_path_188 not fully match count: 2
+	warning: sub_path_187 not fully match count: 2
+	warning: sub_path_191 not fully match count: 2
+	warning: sub_path_190 not fully match count: 2
+	warning: sub_path_334 not fully match count: 2
+	warning: sub_path_333 not fully match count: 2
+	warning: sub_path_331 not fully match count: 2
+	warning: sub_path_330 not fully match count: 2
+testing: test_log_folder/0_c0-0c2s0n1.txt_block_report.txt
+==================================================
+	warning: sub_path_188 not fully match count: 1
+	warning: sub_path_180 not fully match count: 1
+	warning: sub_path_181 not fully match count: 1
+	warning: sub_path_182 not fully match count: 1
+	warning: sub_path_187 not fully match count: 1
+	warning: sub_path_168 not fully match count: 1
+	warning: sub_path_169 not fully match count: 1
+	warning: sub_path_163 not fully match count: 1
+	warning: sub_path_167 not fully match count: 1
+	warning: sub_path_164 not fully match count: 1
+	warning: sub_path_191 not fully match count: 1
+	warning: sub_path_190 not fully match count: 1
+	warning: sub_path_175 not fully match count: 1
+	warning: sub_path_176 not fully match count: 1
+	warning: sub_path_170 not fully match count: 1
+	warning: sub_path_179 not fully match count: 1
+	warning: sub_path_334 not fully match count: 1
+	warning: sub_path_333 not fully match count: 1
+	warning: sub_path_331 not fully match count: 1
+	warning: sub_path_330 not fully match count: 1
+testing: test_log_folder/0_c0-0c0s0n2.txt_block_report.txt
+==================================================
+	warning: sub_path_188 not fully match count: 2
+	warning: sub_path_187 not fully match count: 2
+	warning: sub_path_42 not fully match count: 2
+	warning: sub_path_43 not fully match count: 2
+	warning: sub_path_44 not fully match count: 2
+	warning: sub_path_45 not fully match count: 2
+	warning: sub_path_191 not fully match count: 2
+	warning: sub_path_190 not fully match count: 2
+	warning: sub_path_348 not fully match count: 2
+	warning: sub_path_351 not fully match count: 2
+	warning: sub_path_350 not fully match count: 2
+	warning: sub_path_213 not fully match count: 2
+	warning: sub_path_214 not fully match count: 2
+	warning: sub_path_215 not fully match count: 2
+	warning: sub_path_216 not fully match count: 2
+	warning: sub_path_349 not fully match count: 2
+	warning: sub_path_334 not fully match count: 2
+	warning: sub_path_333 not fully match count: 2
+	warning: sub_path_331 not fully match count: 2
+	warning: sub_path_330 not fully match count: 2
+	warning: sub_path_26 not fully match count: 2
+	warning: sub_path_24 not fully match count: 2
+	warning: sub_path_25 not fully match count: 2
+	warning: sub_path_23 not fully match count: 2
+testing: test_log_folder/0_c0-0c1s0n1.txt_block_report.txt
+==================================================
+	error: sub_path_188 error count: 1
+	warning: sub_path_188 not fully match count: 1
+	warning: sub_path_189 not fully match count: 1
+	warning: sub_path_180 not fully match count: 2
+	warning: sub_path_181 not fully match count: 2
+	warning: sub_path_182 not fully match count: 2
+	warning: sub_path_183 not fully match count: 1
+	warning: sub_path_184 not fully match count: 2
+	warning: sub_path_185 not fully match count: 1
+	warning: sub_path_186 not fully match count: 2
+	error: sub_path_187 error count: 1
+	warning: sub_path_187 not fully match count: 1
+	warning: sub_path_84 not fully match count: 1
+	warning: sub_path_85 not fully match count: 1
+	warning: sub_path_86 not fully match count: 1
+	warning: sub_path_87 not fully match count: 1
+	warning: sub_path_80 not fully match count: 1
+	warning: sub_path_81 not fully match count: 1
+	warning: sub_path_82 not fully match count: 1
+	warning: sub_path_83 not fully match count: 1
+	warning: sub_path_88 not fully match count: 1
+	warning: sub_path_89 not fully match count: 1
+	warning: sub_path_19 not fully match count: 1
+	warning: sub_path_18 not fully match count: 1
+	warning: sub_path_17 not fully match count: 1
+	warning: sub_path_16 not fully match count: 1
+	warning: sub_path_15 not fully match count: 1
+	warning: sub_path_14 not fully match count: 1
+	warning: sub_path_13 not fully match count: 1
+	warning: sub_path_12 not fully match count: 1
+	warning: sub_path_11 not fully match count: 1
+	warning: sub_path_10 not fully match count: 1
+	warning: sub_path_113 not fully match count: 1
+	warning: sub_path_112 not fully match count: 1
+	warning: sub_path_111 not fully match count: 1
+	warning: sub_path_110 not fully match count: 1
+	warning: sub_path_117 not fully match count: 1
+	warning: sub_path_116 not fully match count: 1
+	warning: sub_path_115 not fully match count: 1
+	warning: sub_path_114 not fully match count: 1
+	warning: sub_path_119 not fully match count: 1
+	warning: sub_path_118 not fully match count: 1
+	warning: sub_path_46 not fully match count: 1
+	warning: sub_path_47 not fully match count: 1
+	warning: sub_path_48 not fully match count: 1
+	warning: sub_path_49 not fully match count: 1
+	warning: sub_path_168 not fully match count: 2
+	warning: sub_path_169 not fully match count: 1
+	warning: sub_path_162 not fully match count: 1
+	warning: sub_path_163 not fully match count: 2
+	warning: sub_path_160 not fully match count: 1
+	warning: sub_path_161 not fully match count: 1
+	warning: sub_path_166 not fully match count: 2
+	warning: sub_path_167 not fully match count: 1
+	warning: sub_path_164 not fully match count: 2
+	warning: sub_path_165 not fully match count: 2
+	warning: sub_path_199 not fully match count: 1
+	warning: sub_path_198 not fully match count: 1
+	warning: sub_path_193 not fully match count: 1
+	warning: sub_path_192 not fully match count: 1
+	error: sub_path_191 error count: 1
+	warning: sub_path_191 not fully match count: 1
+	error: sub_path_190 error count: 1
+	warning: sub_path_190 not fully match count: 1
+	warning: sub_path_197 not fully match count: 1
+	warning: sub_path_196 not fully match count: 1
+	warning: sub_path_195 not fully match count: 1
+	warning: sub_path_194 not fully match count: 1
+	warning: sub_path_128 not fully match count: 1
+	warning: sub_path_129 not fully match count: 1
+	warning: sub_path_126 not fully match count: 1
+	warning: sub_path_127 not fully match count: 1
+	warning: sub_path_124 not fully match count: 1
+	warning: sub_path_125 not fully match count: 1
+	warning: sub_path_122 not fully match count: 1
+	warning: sub_path_123 not fully match count: 1
+	warning: sub_path_120 not fully match count: 1
+	warning: sub_path_121 not fully match count: 1
+	warning: sub_path_75 not fully match count: 1
+	warning: sub_path_74 not fully match count: 1
+	warning: sub_path_77 not fully match count: 1
+	warning: sub_path_76 not fully match count: 1
+	warning: sub_path_73 not fully match count: 1
+	warning: sub_path_72 not fully match count: 1
+	warning: sub_path_71 not fully match count: 1
+	warning: sub_path_70 not fully match count: 1
+	warning: sub_path_175 not fully match count: 2
+	warning: sub_path_174 not fully match count: 2
+	warning: sub_path_177 not fully match count: 2
+	warning: sub_path_176 not fully match count: 2
+	warning: sub_path_171 not fully match count: 1
+	warning: sub_path_170 not fully match count: 2
+	warning: sub_path_173 not fully match count: 1
+	warning: sub_path_172 not fully match count: 2
+	warning: sub_path_179 not fully match count: 2
+	warning: sub_path_178 not fully match count: 2
+	warning: sub_path_9 not fully match count: 1
+	warning: sub_path_8 not fully match count: 1
+	warning: sub_path_353 not fully match count: 1
+	warning: sub_path_352 not fully match count: 1
+	warning: sub_path_355 not fully match count: 1
+	warning: sub_path_354 not fully match count: 1
+	warning: sub_path_213 not fully match count: 1
+	warning: sub_path_214 not fully match count: 1
+	warning: sub_path_215 not fully match count: 1
+	warning: sub_path_216 not fully match count: 1
+	warning: sub_path_139 not fully match count: 1
+	warning: sub_path_138 not fully match count: 1
+	warning: sub_path_131 not fully match count: 1
+	warning: sub_path_130 not fully match count: 1
+	warning: sub_path_133 not fully match count: 1
+	warning: sub_path_132 not fully match count: 1
+	warning: sub_path_135 not fully match count: 1
+	warning: sub_path_134 not fully match count: 1
+	warning: sub_path_137 not fully match count: 1
+	warning: sub_path_136 not fully match count: 1
+	warning: sub_path_79 not fully match count: 1
+	warning: sub_path_78 not fully match count: 1
+	warning: sub_path_148 not fully match count: 1
+	warning: sub_path_149 not fully match count: 1
+	warning: sub_path_144 not fully match count: 1
+	warning: sub_path_145 not fully match count: 1
+	warning: sub_path_146 not fully match count: 1
+	warning: sub_path_147 not fully match count: 1
+	warning: sub_path_140 not fully match count: 1
+	warning: sub_path_141 not fully match count: 1
+	warning: sub_path_142 not fully match count: 1
+	warning: sub_path_143 not fully match count: 1
+	warning: sub_path_97 not fully match count: 1
+	warning: sub_path_96 not fully match count: 1
+	warning: sub_path_95 not fully match count: 1
+	warning: sub_path_94 not fully match count: 1
+	warning: sub_path_93 not fully match count: 1
+	warning: sub_path_92 not fully match count: 1
+	warning: sub_path_91 not fully match count: 1
+	warning: sub_path_90 not fully match count: 1
+	warning: sub_path_99 not fully match count: 1
+	warning: sub_path_98 not fully match count: 1
+	warning: sub_path_68 not fully match count: 1
+	warning: sub_path_69 not fully match count: 1
+	warning: sub_path_62 not fully match count: 1
+	warning: sub_path_63 not fully match count: 1
+	warning: sub_path_60 not fully match count: 1
+	warning: sub_path_61 not fully match count: 1
+	warning: sub_path_66 not fully match count: 1
+	warning: sub_path_67 not fully match count: 1
+	warning: sub_path_64 not fully match count: 1
+	warning: sub_path_65 not fully match count: 1
+	warning: sub_path_100 not fully match count: 1
+	warning: sub_path_101 not fully match count: 1
+	warning: sub_path_102 not fully match count: 1
+	warning: sub_path_103 not fully match count: 1
+	warning: sub_path_104 not fully match count: 1
+	warning: sub_path_105 not fully match count: 1
+	warning: sub_path_106 not fully match count: 1
+	warning: sub_path_107 not fully match count: 1
+	warning: sub_path_108 not fully match count: 1
+	warning: sub_path_109 not fully match count: 1
+	warning: sub_path_203 not fully match count: 1
+	warning: sub_path_202 not fully match count: 1
+	warning: sub_path_201 not fully match count: 1
+	warning: sub_path_200 not fully match count: 1
+	warning: sub_path_204 not fully match count: 1
+	warning: sub_path_53 not fully match count: 1
+	warning: sub_path_52 not fully match count: 1
+	warning: sub_path_51 not fully match count: 1
+	warning: sub_path_50 not fully match count: 1
+	warning: sub_path_57 not fully match count: 1
+	warning: sub_path_56 not fully match count: 1
+	warning: sub_path_55 not fully match count: 1
+	warning: sub_path_54 not fully match count: 1
+	warning: sub_path_59 not fully match count: 1
+	warning: sub_path_58 not fully match count: 1
+	warning: sub_path_334 not fully match count: 2
+	warning: sub_path_333 not fully match count: 2
+	warning: sub_path_331 not fully match count: 2
+	warning: sub_path_330 not fully match count: 2
+	warning: sub_path_26 not fully match count: 1
+	warning: sub_path_24 not fully match count: 1
+	warning: sub_path_25 not fully match count: 1
+	warning: sub_path_22 not fully match count: 1
+	warning: sub_path_23 not fully match count: 1
+	warning: sub_path_20 not fully match count: 1
+	warning: sub_path_21 not fully match count: 1
+	warning: sub_path_159 not fully match count: 1
+	warning: sub_path_158 not fully match count: 1
+	warning: sub_path_157 not fully match count: 1
+	warning: sub_path_156 not fully match count: 1
+	warning: sub_path_155 not fully match count: 1
+	warning: sub_path_154 not fully match count: 1
+	warning: sub_path_153 not fully match count: 1
+	warning: sub_path_152 not fully match count: 1
+	warning: sub_path_151 not fully match count: 1
+	warning: sub_path_150 not fully match count: 1
+testing: test_log_folder/0_c0-0c2s1n2.txt_block_report.txt
+==================================================
+	warning: sub_path_188 not fully match count: 2
+	warning: sub_path_187 not fully match count: 2
+	warning: sub_path_191 not fully match count: 2
+	warning: sub_path_190 not fully match count: 2
+	warning: sub_path_334 not fully match count: 2
+	warning: sub_path_333 not fully match count: 2
+	warning: sub_path_331 not fully match count: 2
+	warning: sub_path_330 not fully match count: 2
+testing: test_log_folder/0_c0-0c2s1n1.txt_block_report.txt
+==================================================
+	warning: sub_path_188 not fully match count: 2
+	warning: sub_path_187 not fully match count: 2
+	warning: sub_path_191 not fully match count: 2
+	warning: sub_path_190 not fully match count: 2
+	warning: sub_path_334 not fully match count: 2
+	warning: sub_path_333 not fully match count: 2
+	warning: sub_path_331 not fully match count: 2
+	warning: sub_path_330 not fully match count: 2
+testing: test_log_folder/0_c0-0c2s0n2.txt_block_report.txt
+==================================================
+	warning: sub_path_188 not fully match count: 2
+	warning: sub_path_187 not fully match count: 2
+	warning: sub_path_42 not fully match count: 2
+	warning: sub_path_43 not fully match count: 2
+	warning: sub_path_44 not fully match count: 2
+	warning: sub_path_45 not fully match count: 2
+	warning: sub_path_191 not fully match count: 2
+	warning: sub_path_190 not fully match count: 2
+	warning: sub_path_348 not fully match count: 2
+	warning: sub_path_351 not fully match count: 2
+	warning: sub_path_350 not fully match count: 2
+	warning: sub_path_213 not fully match count: 2
+	warning: sub_path_214 not fully match count: 2
+	warning: sub_path_215 not fully match count: 2
+	warning: sub_path_216 not fully match count: 2
+	warning: sub_path_349 not fully match count: 2
+	warning: sub_path_334 not fully match count: 2
+	warning: sub_path_333 not fully match count: 2
+	warning: sub_path_331 not fully match count: 2
+	warning: sub_path_330 not fully match count: 2
+	warning: sub_path_26 not fully match count: 2
+	warning: sub_path_24 not fully match count: 2
+	warning: sub_path_25 not fully match count: 2
+	warning: sub_path_23 not fully match count: 2
+testing: test_log_folder/0_c0-0c1s2n1.txt_block_report.txt
+==================================================
+	warning: sub_path_188 not fully match count: 2
+	warning: sub_path_187 not fully match count: 2
+	warning: sub_path_191 not fully match count: 2
+	warning: sub_path_190 not fully match count: 2
+	warning: sub_path_334 not fully match count: 2
+	warning: sub_path_333 not fully match count: 2
+	warning: sub_path_331 not fully match count: 2
+	warning: sub_path_330 not fully match count: 2
+testing: test_log_folder/0_c0-0c1s1n2.txt_block_report.txt
+==================================================
+	warning: sub_path_188 not fully match count: 2
+	warning: sub_path_187 not fully match count: 2
+	warning: sub_path_191 not fully match count: 2
+	warning: sub_path_190 not fully match count: 2
+	warning: sub_path_334 not fully match count: 2
+	warning: sub_path_333 not fully match count: 2
+	warning: sub_path_331 not fully match count: 2
+	warning: sub_path_330 not fully match count: 2
+testing: test_log_folder/0_c0-0c2s2n1.txt_block_report.txt
+==================================================
+	warning: sub_path_188 not fully match count: 2
+	warning: sub_path_181 not fully match count: 1
+	warning: sub_path_183 not fully match count: 1
+	warning: sub_path_185 not fully match count: 1
+	warning: sub_path_187 not fully match count: 2
+	warning: sub_path_236 not fully match count: 1
+	warning: sub_path_237 not fully match count: 1
+	warning: sub_path_234 not fully match count: 1
+	warning: sub_path_235 not fully match count: 1
+	warning: sub_path_232 not fully match count: 1
+	warning: sub_path_233 not fully match count: 1
+	warning: sub_path_230 not fully match count: 1
+	warning: sub_path_231 not fully match count: 1
+	warning: sub_path_41 not fully match count: 1
+	warning: sub_path_42 not fully match count: 1
+	warning: sub_path_45 not fully match count: 1
+	warning: sub_path_302 not fully match count: 1
+	warning: sub_path_303 not fully match count: 1
+	warning: sub_path_300 not fully match count: 1
+	warning: sub_path_301 not fully match count: 1
+	warning: sub_path_306 not fully match count: 1
+	warning: sub_path_307 not fully match count: 1
+	warning: sub_path_304 not fully match count: 1
+	warning: sub_path_305 not fully match count: 1
+	warning: sub_path_308 not fully match count: 1
+	warning: sub_path_309 not fully match count: 1
+	warning: sub_path_169 not fully match count: 1
+	warning: sub_path_167 not fully match count: 1
+	warning: sub_path_346 not fully match count: 1
+	warning: sub_path_347 not fully match count: 1
+	warning: sub_path_191 not fully match count: 2
+	warning: sub_path_190 not fully match count: 2
+	warning: sub_path_290 not fully match count: 1
+	warning: sub_path_291 not fully match count: 1
+	warning: sub_path_292 not fully match count: 1
+	warning: sub_path_293 not fully match count: 1
+	warning: sub_path_294 not fully match count: 1
+	warning: sub_path_295 not fully match count: 1
+	warning: sub_path_296 not fully match count: 1
+	warning: sub_path_297 not fully match count: 1
+	warning: sub_path_298 not fully match count: 1
+	warning: sub_path_299 not fully match count: 1
+	warning: sub_path_348 not fully match count: 1
+	warning: sub_path_351 not fully match count: 1
+	warning: sub_path_359 not fully match count: 1
+	warning: sub_path_358 not fully match count: 1
+	warning: sub_path_221 not fully match count: 1
+	warning: sub_path_223 not fully match count: 1
+	warning: sub_path_222 not fully match count: 1
+	warning: sub_path_225 not fully match count: 1
+	warning: sub_path_224 not fully match count: 1
+	warning: sub_path_319 not fully match count: 1
+	warning: sub_path_318 not fully match count: 1
+	warning: sub_path_315 not fully match count: 1
+	warning: sub_path_314 not fully match count: 1
+	warning: sub_path_317 not fully match count: 1
+	warning: sub_path_316 not fully match count: 1
+	warning: sub_path_311 not fully match count: 1
+	warning: sub_path_310 not fully match count: 1
+	warning: sub_path_313 not fully match count: 1
+	warning: sub_path_312 not fully match count: 1
+	warning: sub_path_171 not fully match count: 1
+	warning: sub_path_173 not fully match count: 1
+	warning: sub_path_179 not fully match count: 1
+	warning: sub_path_7 not fully match count: 1
+	warning: sub_path_5 not fully match count: 1
+	warning: sub_path_4 not fully match count: 1
+	warning: sub_path_3 not fully match count: 1
+	warning: sub_path_211 not fully match count: 1
+	warning: sub_path_212 not fully match count: 1
+	warning: sub_path_324 not fully match count: 1
+	warning: sub_path_325 not fully match count: 1
+	warning: sub_path_326 not fully match count: 1
+	warning: sub_path_327 not fully match count: 1
+	warning: sub_path_320 not fully match count: 1
+	warning: sub_path_321 not fully match count: 1
+	warning: sub_path_322 not fully match count: 1
+	warning: sub_path_323 not fully match count: 1
+	warning: sub_path_328 not fully match count: 1
+	warning: sub_path_329 not fully match count: 1
+	warning: sub_path_287 not fully match count: 1
+	warning: sub_path_286 not fully match count: 1
+	warning: sub_path_285 not fully match count: 1
+	warning: sub_path_284 not fully match count: 1
+	warning: sub_path_289 not fully match count: 1
+	warning: sub_path_288 not fully match count: 1
+	warning: sub_path_35 not fully match count: 1
+	warning: sub_path_34 not fully match count: 1
+	warning: sub_path_37 not fully match count: 1
+	warning: sub_path_36 not fully match count: 1
+	warning: sub_path_39 not fully match count: 1
+	warning: sub_path_38 not fully match count: 1
+	warning: sub_path_342 not fully match count: 1
+	warning: sub_path_343 not fully match count: 1
+	warning: sub_path_208 not fully match count: 1
+	warning: sub_path_207 not fully match count: 1
+	warning: sub_path_335 not fully match count: 1
+	error: sub_path_334 error count: 1
+	warning: sub_path_334 not fully match count: 1
+	error: sub_path_333 error count: 1
+	warning: sub_path_333 not fully match count: 1
+	warning: sub_path_331 not fully match count: 2
+	warning: sub_path_330 not fully match count: 2
+	warning: sub_path_339 not fully match count: 1
+	warning: sub_path_338 not fully match count: 1
+	warning: sub_path_27 not fully match count: 1
+testing: test_log_folder/0_c0-0c0s0n1.txt_block_report.txt
+==================================================
+testing: test_log_folder/0_c0-0c1s1n1.txt_block_report.txt
+==================================================
+	warning: sub_path_188 not fully match count: 2
+	warning: sub_path_187 not fully match count: 2
+	warning: sub_path_191 not fully match count: 2
+	warning: sub_path_190 not fully match count: 2
+	warning: sub_path_334 not fully match count: 2
+	warning: sub_path_333 not fully match count: 2
+	warning: sub_path_331 not fully match count: 2
+	warning: sub_path_330 not fully match count: 2
+testing: test_log_folder/0_c0-0c1s2n2.txt_block_report.txt
+==================================================
+	warning: sub_path_188 not fully match count: 2
+	warning: sub_path_187 not fully match count: 2
+	warning: sub_path_191 not fully match count: 2
+	warning: sub_path_190 not fully match count: 2
+	warning: sub_path_334 not fully match count: 2
+	warning: sub_path_333 not fully match count: 2
+	warning: sub_path_331 not fully match count: 2
+	warning: sub_path_330 not fully match count: 2
+testing: test_log_folder/0_c0-0c0s1n1.txt_block_report.txt
+==================================================
+	warning: sub_path_188 not fully match count: 2
+	warning: sub_path_187 not fully match count: 2
+	warning: sub_path_191 not fully match count: 2
+	warning: sub_path_190 not fully match count: 2
+	warning: sub_path_334 not fully match count: 2
+	warning: sub_path_333 not fully match count: 2
+	warning: sub_path_331 not fully match count: 2
+	warning: sub_path_330 not fully match count: 2
+testing: test_log_folder/0_c0-0c0s1n2.txt_block_report.txt
+==================================================
+	warning: sub_path_188 not fully match count: 2
+	warning: sub_path_187 not fully match count: 2
+	warning: sub_path_191 not fully match count: 2
+	warning: sub_path_190 not fully match count: 2
+	warning: sub_path_334 not fully match count: 2
+	warning: sub_path_333 not fully match count: 2
+	warning: sub_path_331 not fully match count: 2
+	warning: sub_path_330 not fully match count: 2
+testing: test_log_folder/0_c0-0c0s2n2.txt_block_report.txt
+==================================================
+	warning: sub_path_188 not fully match count: 2
+	warning: sub_path_187 not fully match count: 2
+	warning: sub_path_191 not fully match count: 2
+	warning: sub_path_190 not fully match count: 2
+	warning: sub_path_334 not fully match count: 2
+	warning: sub_path_333 not fully match count: 2
+	warning: sub_path_331 not fully match count: 2
+	warning: sub_path_330 not fully match count: 2
+testing: test_log_folder/0_c0-0c0s2n1.txt_block_report.txt
+==================================================
+	warning: sub_path_188 not fully match count: 2
+	warning: sub_path_187 not fully match count: 2
+	warning: sub_path_191 not fully match count: 2
+	warning: sub_path_190 not fully match count: 2
+	warning: sub_path_210 not fully match count: 1
+	warning: sub_path_211 not fully match count: 1
+	warning: sub_path_212 not fully match count: 1
+	warning: sub_path_209 not fully match count: 1
+	warning: sub_path_334 not fully match count: 2
+	warning: sub_path_333 not fully match count: 2
+	warning: sub_path_331 not fully match count: 2
+	warning: sub_path_330 not fully match count: 2
+testing: test_log_folder/0_c0-0c1s0n2.txt_block_report.txt
+==================================================
+	warning: sub_path_188 not fully match count: 2
+	warning: sub_path_187 not fully match count: 2
+	warning: sub_path_42 not fully match count: 2
+	warning: sub_path_43 not fully match count: 2
+	warning: sub_path_44 not fully match count: 2
+	warning: sub_path_45 not fully match count: 2
+	warning: sub_path_191 not fully match count: 2
+	warning: sub_path_190 not fully match count: 2
+	warning: sub_path_348 not fully match count: 2
+	warning: sub_path_351 not fully match count: 2
+	warning: sub_path_350 not fully match count: 2
+	warning: sub_path_213 not fully match count: 2
+	warning: sub_path_214 not fully match count: 2
+	warning: sub_path_215 not fully match count: 2
+	warning: sub_path_216 not fully match count: 2
+	warning: sub_path_349 not fully match count: 2
+	warning: sub_path_334 not fully match count: 2
+	warning: sub_path_333 not fully match count: 2
+	warning: sub_path_331 not fully match count: 2
+	warning: sub_path_330 not fully match count: 2
+	warning: sub_path_26 not fully match count: 2
+	warning: sub_path_24 not fully match count: 2
+	warning: sub_path_25 not fully match count: 2
+	warning: sub_path_23 not fully match count: 2
+====================================
+warning! sub_path_188 1 33
+warning! sub_path_180 31 33
+warning! sub_path_181 30 33
+warning! sub_path_182 31 33
+warning! sub_path_183 32 33
+warning! sub_path_184 32 33
+warning! sub_path_185 32 33
+warning! sub_path_186 32 33
+warning! sub_path_187 1 33
+warning! sub_path_42 27 33
+warning! sub_path_43 28 34
+warning! sub_path_44 28 34
+warning! sub_path_45 27 33
+warning! sub_path_168 31 33
+warning! sub_path_169 31 33
+warning! sub_path_163 31 33
+warning! sub_path_166 32 33
+warning! sub_path_167 31 33
+warning! sub_path_164 31 33
+warning! sub_path_165 32 33
+warning! sub_path_348 27 33
+warning! sub_path_349 28 34
+warning! sub_path_191 1 33
+warning! sub_path_190 1 33
+warning! sub_path_175 31 33
+warning! sub_path_174 32 33
+warning! sub_path_177 32 33
+warning! sub_path_176 31 33
+warning! sub_path_171 32 33
+warning! sub_path_170 31 33
+warning! sub_path_173 32 33
+warning! sub_path_172 32 33
+warning! sub_path_179 30 33
+warning! sub_path_178 32 33
+warning! sub_path_351 27 33
+warning! sub_path_350 28 34
+warning! sub_path_210 33 34
+warning! sub_path_211 32 33
+warning! sub_path_212 32 33
+warning! sub_path_213 27 33
+warning! sub_path_214 27 33
+warning! sub_path_215 27 33
+warning! sub_path_216 27 33
+warning! sub_path_209 33 34
+warning! sub_path_334 1 33
+warning! sub_path_333 1 33
+warning! sub_path_331 1 34
+warning! sub_path_330 1 34
+warning! sub_path_26 27 33
+warning! sub_path_24 27 33
+warning! sub_path_25 27 33
+warning! sub_path_23 27 33

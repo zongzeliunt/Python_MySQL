@@ -1,0 +1,41 @@
+﻿http://www.atyun.com/18664.html
+
+http://zwgeek.com/2018/04/08/Tensorflow%E5%85%A5%E9%97%A8/
+http://www.tensorfly.cn/tfdoc/tutorials/mnist_beginners.html
+http://yann.lecun.com/exdb/mnist/
+
+交叉熵
+https://blog.csdn.net/rtygbwwwerr/article/details/50778098
+https://blog.csdn.net/chaipp0607/article/details/73392175
+
+x = tf.placeholder(tf.float32, [None, 784], name="x")
+# Define loss and optimizer
+y_ = tf.placeholder(tf.int64, [None])
+
+tf.placeholder 可以理解为定义占位符，这些占位符虽然定义的时候没有值，但在实际运行中会给定输入值。这里定义了两个占位符，一个是输入值 x，类型是浮点数，维度是 [None, 784]，None 代表不确定数量，784 代表 28*28，也就是一张 MNIST 输入集的图片，这里的意思是说输入层x可以是不确定数量的图片，代表着我们这个网络可以同时输入多张图片的数据。这种变量就是 TensorFlow 的张量 tensor，而每个 tensor 都可以指定名称，但是我们一般只指定具有代表性的几个 tensor 的名称，比如这个输入节点的名称是 x。
+
+卷积和池化
+	conv2d 生成的是二维特征向量，conv2d 有两个参数是必要的，input 和 filter。我们的输入参数是一张图片，三维的数据[宽，高，颜色空间]，为了最后向量相乘的结果是二维的，filer 的第三个维度应该和 input 的第四个维度相等，也就是 in_channels 相等，这样永远都只能输出一个二维的特征向量，也就是这个函数叫 conv2d 的原因，这里比较难理解，可以仔细考虑一下。
+
+	如果 padding 是 SAME，则会在输入矩阵的两端补齐 0，使补齐后的输入矩阵维度刚好可以被卷积核处理，最后得到的特征矩阵和原来的输入矩阵维度相同。
+	如果 padding 是 VALID，则会抛弃边界的节点，最后输出的特征矩阵维度和输入矩阵不相同
+		
+	池化的作用类似于压缩，这种压缩是在缩小输入值的维度的同时还要保持输入值的特征。比如在 2*2 的 4 个像素点中取最大值，最小值或者平均值。不过经过研究，最大池化能够比较好的保持原来的特征值。
+
+	题：
+	x  = 200 * 200
+	conv1: k 5*5, pad = 1, stride 2
+	pool: k 3*3, pad = 0, stride 1
+	conv2: k 3*3, pad = 1, stride 1
+	过conv1后，特征矩阵 size是100， 因为pad = 1， 边界补0了，而stride是2，就是卷积步长是2，那么200 * 200 的图变100 * 100了
+	过pool后，pad=0，可能就是那个valid，边界被抛弃，而pool层的size是 3*3， 所以外面个3就抛弃了变成97
+	过conv2，pad=1，步长也是1，所以没有损失
+	这就可以解释为什么我刷的那道题最后是97
+
+
+
+
+卷积操作的输出不影响输入值的维度，但是影响输入值的深度。池化操作不影响输入值的深度但是影响输入值的维度，经过两层的卷积和 22 的池化后，输入值的维度变成了原来的 1/4。深度变成 64。也就是 7\7*64。
+
+全连接层
+	因为全连接层只能处理一维的问题。后面用 tf.matmul 向量乘法实现了全连接层的操作。tf.nn.relu 和前面一样，是个激活函数。

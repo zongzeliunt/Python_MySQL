@@ -1,0 +1,17 @@
+读mnist的几个方法：
+1) 
+(x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data()
+	这是直接读keras里的数据，这个数据是明码，整数
+	
+
+2)
+mnist = input_data.read_data_sets('MNIST_data', one_hot=True)
+batch = mnist.train.next_batch(50)
+	batch是未来50对数据，x是batch[0], y是batch[1]
+
+x = mnist.train.images ; x = mnist.test.images
+	可以使用上面这个办法读所有的x
+y = mnist.train.labels ; y = mnist.test.labels
+	#可以用上面这个办法读所有的y
+
+
