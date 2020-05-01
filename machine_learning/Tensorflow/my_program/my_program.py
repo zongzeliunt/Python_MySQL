@@ -14,8 +14,8 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 
 #predict
-#{{{
 def weight_variable(shape):
+#{{{
   """weight_variable generates a weight variable of a given shape."""
   initial = tf.truncated_normal(shape, stddev=0.1)
   return tf.Variable(initial)
