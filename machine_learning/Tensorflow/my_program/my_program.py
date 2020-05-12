@@ -1,5 +1,7 @@
 #python3.7 不知道又改变了什么，找不到input_data了
 #使用python3.6执行 python3.6 my_program.py
+#这个是原版，用来给whole_flow_test.py做参考的，一点都不能改
+
 
 
 from tensorflow.examples.tutorials.mnist import input_data

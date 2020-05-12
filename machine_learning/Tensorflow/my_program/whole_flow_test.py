@@ -1,3 +1,5 @@
+#这个是我自己写的程序，用来测试我自己的函数和TF的函数完全match
+#TF flow怎么跑，参考my_program.py
 
 
 import tensorflow.compat.v1 as tf
@@ -10,7 +12,7 @@ import numpy as np
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 
-TF = 4 
+TF = 0 
 
 def weight_variable(shape):
 #{{{
@@ -22,7 +24,7 @@ def weight_variable(shape):
 def bias_variable(shape):
 #{{{
 	"""bias_variable generates a bias variable of a given shape."""
-	initial = tf.constant(0.1, shape=shape)
+	initial = tf.constant(np.float64(0.1), shape=shape)
 	return tf.Variable(initial)
 #}}}
 
@@ -43,7 +45,7 @@ def max_pool_2x2(x):
 #}}}
 
 
-def W_write  (W_conv1, shape, file_name):
+def W_write_4d  (matrix, shape, file_name):
 #{{{
 	fl = open(file_name, "w")
 	for l_0 in range( shape[0]):
@@ -52,12 +54,12 @@ def W_write  (W_conv1, shape, file_name):
 				string = ""
 				for l_3 in range( shape[3]):
 
-					string += str(W_conv1[l_0][l_1][l_2][l_3]) + " "
+					string += str(matrix[l_0][l_1][l_2][l_3]) + " "
 				fl.write(string + "\n")
 	fl.close() 
 #}}}
 	
-def W_read (shape, file_name):
+def W_read_4d (shape, file_name):
 #{{{
 	result = np.zeros (shape)
 	
@@ -76,10 +78,38 @@ def W_read (shape, file_name):
 	return result
 #}}}
 
+def W_write_2d  (matrix, shape, file_name):
+#{{{
+	fl = open(file_name, "w")
+	for l_0 in range( shape[0]):
+		string = ""
+		for l_1 in range( shape[1]):
+			string += str(matrix[l_0][l_1]) + " "
+		fl.write(string + "\n")
+	fl.close() 
+#}}}
+	
+def W_read_2d (shape, file_name):
+#{{{
+	result = np.zeros (shape)
+	
+	fl = open(file_name, "r")
+	for l_0 in range( shape[0]):
+		string = fl.readline()
+		string.replace('\n', '')
+		string = string.split(' ')
+		line = np.zeros(shape[1])
+		for l_1 in range( shape[1]):
+			line[l_1] = float(string[l_1])
+		result[l_0] = line
+	fl.close() 
+	return result
+#}}}
+
 def two_file_compare (file1, file2, shape):
 #{{{
-	data_1 = W_read (shape, file1)
-	data_2 = W_read (shape, file2)
+	data_1 = W_read_4d (shape, file1)
+	data_2 = W_read_4d (shape, file2)
 
 	
 	for l0 in range (shape[0]):	
@@ -161,21 +191,28 @@ def my_conv2d (x, W):
 	return result
 #}}}
 
-def my_relu(x):
-#{{{
-	def single_relu (x):
-		return x if x > 0 else 0
+def single_relu (x):
+	return x if x > 0 else 0
 
+def my_relu_4d(x):
+#{{{
 	x_shape = judge_size(x)
 	result = np.zeros(x_shape)
 	for row in range (x_shape[1]):	
 		for col in range (x_shape[2]):
 			for i in range (x_shape[3]):
 				result[0][row][col][i] = single_relu(x[0][row][col][i])
-	
+	return result
 
+#}}}
 
-
+def my_relu_2d(x):
+#{{{
+	x_shape = [len(x), len(x[0])]
+	result = np.zeros(x_shape)
+	for row in range (x_shape[0]):	
+		for col in range (x_shape[1]):	
+			result[row][col] = single_relu(x[row][col])
 	return result
 
 #}}}
@@ -235,6 +272,45 @@ def my_pool_2x2 (x):
 	return result
 #}}}
 
+def my_matmul(x, y):
+#{{{
+	#x y 都是二维矩阵，只要行列的size就行
+	x_row = len(x)
+	x_col = len(x[0])
+	y_row = len(y)
+	y_col = len(y[0])
+
+	#x_col 和y_row理论上应该一致，如果不一致这里得有error message，不过我这就不用了
+	result = np.zeros([x_row, y_col])
+	for x_row_pos in range (x_row):
+		row_tmp = np.zeros(y_col)
+		for y_col_pos in range (y_col):
+			col_tmp = 0
+			for x_col_pos in range (x_col):# x_col_pos也指y_row_pos
+				col_tmp += x[x_row_pos][x_col_pos] * y[x_col_pos][y_col_pos]
+			row_tmp [y_col_pos] = col_tmp
+		result[x_row_pos] = row_tmp
+	
+	return result	
+#}}}
+
+def my_reshape_flat (x, reshape_shape):
+#{{{
+	#现在我只能做成全平，但是输出的是[1, reshape_shape]的二维数组 
+	result = [0] * reshape_shape
+	x_shape = judge_size(x)
+	x_0 = x_shape[0]
+	x_1 = x_shape[1]
+	x_2 = x_shape[2]
+	x_3 = x_shape[3]
+	for l0 in range (x_0):
+		for l1 in range (x_1):
+			for l2 in range (x_2):
+				for l3 in range (x_3):
+					result[l0 * x_3*x_1*x_2 + l1 * x_3*x_2 + l2 * x_3 + l3] = x[l0][l1][l2][l3]
+	return [result]
+#}}}
+
 #=================================================
 #TF
 W1_shape = [5, 5, 1, 32]
@@ -244,19 +320,25 @@ conv1_shape = [1,28,28,32] #也是h_conv1的shape
 conv2_shape = [1,14,14,64] #也是h_conv2的shape
 h_pool1_shape = [1, 14, 14, 32]
 h_pool2_shape = [1, 7, 7, 64]
+W_fc1_shape = [7* 7* 64, 1024]
 
 
 if TF == 1:
 #{{{
+	#全flow测试
 	from tensorflow.examples.tutorials.mnist import input_data
 	mnist = input_data.read_data_sets('MNIST_data', one_hot=True)
 	#画图必须在一开始，要不出错
 	#W_conv1 = weight_variable(W1_shape)
 	#b_conv1 = bias_variable([32])
 
-	W_conv2 = weight_variable(W2_shape)
-	b_conv2 = bias_variable([64])
+	#W_conv2 = weight_variable(W2_shape)
+	#b_conv2 = bias_variable([64])
 	
+	#W_fc1 = weight_variable(W_fc1_shape)
+	b_fc1 = bias_variable([1024])
+
+
 	x = tf.placeholder(tf.float32, [None, 784])
 	x_image = tf.reshape(x, x_shape)
 
@@ -271,77 +353,90 @@ if TF == 1:
 	#x
 	#batch = mnist.train.next_batch(1)
 	#result = sess.run (x_image, feed_dict={x: batch[0]})
-	#W_write(result, x_shape, "data/x_image.txt" )
+	#W_write_4d(result, x_shape, "data/x_image.txt" )
 
 	#W1	
 	#result = sess.run (W_conv1)
-	#W_write(result, W1_shape, "data_orig/W_conv1.txt" )
+	#W_write_4d(result, W1_shape, "data_orig/W_conv1.txt" )
 
 	#conv1 result
 	"""
-	W_conv1 = W_read(W1_shape, "data_orig/W_conv1.txt")	
-	x_image = W_read(x_shape, "data_orig/x_image.txt")	
+	W_conv1 = W_read_4d(W1_shape, "data_orig/W_conv1.txt")	
+	x_image = W_read_4d(x_shape, "data_orig/x_image.txt")	
 	conv_result = conv2d(x_image, W_conv1)
 
 	result = sess.run (conv_result)
-	W_write(result, conv1_shape, "data_orig/conv1.txt" )
+	W_write_4d(result, conv1_shape, "data_orig/conv1.txt" )
 	"""
 	
 	#h_conv1
 	"""
-	conv_result = W_read (conv1_shape, "data_orig/conv1.txt")
+	conv_result = W_read_4d (conv1_shape, "data_orig/conv1.txt")
 	h_conv1 = tf.nn.relu(conv_result + b_conv1)
 	
 	result = sess.run (h_conv1)
-	W_write(result, conv1_shape, "data_orig/h_conv1.txt" )
+	W_write_4d(result, conv1_shape, "data_orig/h_conv1.txt" )
 	"""
 
 	#pool1
 	"""
-	h_conv1 = W_read (conv1_shape, "data_orig/h_conv1.txt")
+	h_conv1 = W_read_4d (conv1_shape, "data_orig/h_conv1.txt")
 	h_pool1 = max_pool_2x2(h_conv1)
 	
 	result = sess.run (h_pool1)
-	W_write(result, h_pool1_shape , "data_orig/h_pool1.txt" )
+	W_write_4d(result, h_pool1_shape , "data_orig/h_pool1.txt" )
 	"""
 
 	#w2
 	"""
 	result = sess.run (W_conv2)
-	W_write(result, W2_shape, "data_orig/W_conv2.txt" )
+	W_write_4d(result, W2_shape, "data_orig/W_conv2.txt" )
 	"""
 	
 	#conv2 result
 	"""
-	W_conv2 = W_read(W2_shape, "data_orig/W_conv2.txt")	
-	h_pool1 = W_read(h_pool1_shape, "data_orig/h_pool1.txt")	
+	W_conv2 = W_read_4d(W2_shape, "data_orig/W_conv2.txt")	
+	h_pool1 = W_read_4d(h_pool1_shape, "data_orig/h_pool1.txt")	
 	conv_result = conv2d(h_pool1, W_conv2)
 
 	result = sess.run (conv_result)
-	W_write(result, conv2_shape, "data_orig/conv2.txt" )
+	W_write_4d(result, conv2_shape, "data_orig/conv2.txt" )
 	"""
 	
 	#h_conv2
 	"""
-	conv_result = W_read (conv2_shape, "data_orig/conv2.txt")
+	conv_result = W_read_4d (conv2_shape, "data_orig/conv2.txt")
 	h_conv2 = tf.nn.relu(conv_result + b_conv2)
 	
 	result = sess.run (h_conv2)
-	W_write(result, conv2_shape, "data_orig/h_conv2.txt" )
+	W_write_4d(result, conv2_shape, "data_orig/h_conv2.txt" )
 	"""
 
 	#pool2
 	"""
-	h_conv2 = W_read (conv2_shape, "data_orig/h_conv2.txt")
+	h_conv2 = W_read_4d (conv2_shape, "data_orig/h_conv2.txt")
 	h_pool2 = max_pool_2x2(h_conv2)
 	
 	result = sess.run (h_pool2)
-	W_write(result, h_pool2_shape , "data_orig/h_pool2.txt" )
+	W_write_4d(result, h_pool2_shape , "data_orig/h_pool2.txt" )
+	"""
+	
+	#W_fc1
+	"""
+	result = sess.run (W_fc1)
+	W_write_2d(result, W_fc1_shape, "data_orig/W_fc1.txt" )
 	"""
 
+	W_fc1 = W_read_2d (W_fc1_shape, "data_orig/W_fc1.txt")
+	h_pool2 = W_read_4d (h_pool2_shape, "data_orig/h_pool2.txt")
+	h_pool2_flat = tf.reshape(h_pool2, [-1, 7*7*64])
+	
+	h_fc1 = tf.nn.relu(tf.matmul(h_pool2_flat, W_fc1) + b_fc1)
+	result = sess.run(h_fc1)
+	W_write_2d(result, [1, 1024], "data_orig/h_fc1.txt")
+	
 
-
-
+	
 
 	sess.close()
 #}}}
@@ -354,6 +449,8 @@ elif TF == 2:
 	#以下这几个shape是算出来的，不是我手动写的，但是写在这里看着玩
 	conv1_shape = [1,5,5,4]
 	h_pool1_shape = [1, 3, 3, 4]
+	W_fc1_shape = [3*3*4, 4]	
+
 
 	
 	#所有的常量声明必须在一开头
@@ -362,8 +459,10 @@ elif TF == 2:
 
 	#x = weight_variable(x_shape)
 	#W_conv1 = weight_variable(W1_shape)
-	b_conv1 = bias_variable([4])
+	#b_conv1 = bias_variable([4])
 
+	#W_fc1 = weight_variable(W_fc1_shape)
+	b_fc1 = bias_variable([4])
 
 	sess = tf.InteractiveSession()
 	sess.run(tf.global_variables_initializer())
@@ -371,42 +470,60 @@ elif TF == 2:
 	#x
 	"""
 	result = sess.run (x)
-	W_write(result, x_shape, "data_small/x_image.txt" )
+	W_write_4d(result, x_shape, "data_small/x_image.txt" )
 	"""
 
 
 	#W	
 	"""
 	result = sess.run (W_conv1)
-	W_write(result, W1_shape, "data_small/W_conv1.txt" )
+	W_write_4d(result, W1_shape, "data_small/W_conv1.txt" )
 	"""
 
 	#conv result
 	"""
-	W_conv1 = W_read(W1_shape, "data_small/W_conv1.txt")	
-	x_image = W_read(x_shape, "data_small/x_image.txt")	
+	W_conv1 = W_read_4d(W1_shape, "data_small/W_conv1.txt")	
+	x_image = W_read_4d(x_shape, "data_small/x_image.txt")	
 	conv_result = conv2d(x_image, W_conv1)
 
 	result = sess.run (conv_result)
-	W_write(result, conv1_shape, "data_small/conv1.txt" )
+	W_write_4d(result, conv1_shape, "data_small/conv1.txt" )
 	"""
 	
 	#h_conv1
 	"""
-	conv_result = W_read (conv1_shape, "data_small/conv1.txt")
+	conv_result = W_read_4d (conv1_shape, "data_small/conv1.txt")
 	h_conv1 = tf.nn.relu(conv_result + b_conv1)
 	
 	result = sess.run (h_conv1)
-	W_write(result, conv1_shape, "data_small/h_conv1.txt" )
+	W_write_4d(result, conv1_shape, "data_small/h_conv1.txt" )
 	"""
 	
 	#pool1
 	"""
-	h_conv1 = W_read (conv1_shape, "data_small/h_conv1.txt")
+	h_conv1 = W_read_4d (conv1_shape, "data_small/h_conv1.txt")
 	h_pool1 = max_pool_2x2(h_conv1)
 	
 	result = sess.run (h_pool1)
-	W_write(result, h_pool1_shape , "data_small/h_pool1.txt" )
+	W_write_4d(result, h_pool1_shape , "data_small/h_pool1.txt" )
+	"""
+
+	#W_fc1
+	"""
+	result = sess.run (W_fc1)
+	W_write_2d(result, W_fc1_shape, "data_small/W_fc1.txt" )
+	"""
+
+	#h_fc1
+	"""
+	W_fc1 = W_read_2d (W_fc1_shape, "data_small/W_fc1.txt")
+
+	h_pool1 = W_read_4d (h_pool1_shape, "data_small/h_pool1.txt")
+	h_pool1_flat = tf.reshape(h_pool1, [-1, 3*3*4])
+	
+	h_fc1 = tf.nn.relu(tf.matmul(h_pool1_flat, W_fc1) + b_fc1)
+	result = sess.run(h_fc1)
+	W_write_2d(result, [1, 4], "data_small/h_fc1.txt")
 	"""
 
 	
@@ -415,98 +532,125 @@ elif TF == 2:
 
 elif TF == 3:
 #{{{
-	#小实验
+	#小实验,调用TF的函数但是跑的data是小规模
 	x_shape = [1, 5, 5, 1]
 	W1_shape = [2, 2, 1, 4]
 	conv1_shape = [1,5,5,4]
 	h_pool1_shape = [1, 3, 3, 4]
+	h_pool1_shape_2d = [1, 3* 3* 4]
+	W_fc1_shape = [3*3*4, 4]	
 
 	#conv
 	"""
-	W_conv1 = W_read(W1_shape, "data_small/W_conv1.txt")	
-	x_image = W_read(x_shape, "data_small/x_image.txt")	
+	W_conv1 = W_read_4d(W1_shape, "data_small/W_conv1.txt")	
+	x_image = W_read_4d(x_shape, "data_small/x_image.txt")	
 	result = my_conv2d (x_image, W_conv1)
-	W_write(result, conv1_shape, "data_small/conv1_my.txt" )
+	W_write_4d(result, conv1_shape, "data_small/conv1_my.txt" )
 	"""
 	
 	#h_conv1 4 是小实验的out_size
 	"""
 	b_conv1 = [0.1] * 4
-	conv_result = W_read (conv1_shape, "data_small/conv1_my.txt")
-	h_conv1 = my_relu(conv_result + b_conv1)
-	W_write(h_conv1, conv1_shape, "data_small/h_conv1_my.txt" )
+	conv_result = W_read_4d (conv1_shape, "data_small/conv1_my.txt")
+	h_conv1 = my_relu_4d(conv_result + b_conv1)
+	W_write_4d(h_conv1, conv1_shape, "data_small/h_conv1_my.txt" )
 	"""
 	
 	#pool1
-	h_conv1 = W_read (conv1_shape, "data_small/h_conv1_my.txt")
+	"""
+	h_conv1 = W_read_4d (conv1_shape, "data_small/h_conv1_my.txt")
 	h_pool1 = my_pool_2x2(h_conv1)
-	W_write(h_pool1, h_pool1_shape , "data_small/h_pool1_my.txt" )
+	W_write_4d(h_pool1, h_pool1_shape , "data_small/h_pool1_my.txt" )
+	"""
 
-
-
+	#h_fc1
+	"""
+	W_fc1 = W_read_2d (W_fc1_shape, "data_small/W_fc1.txt")
+	h_pool1 = W_read_4d (h_pool1_shape, "data_small/h_pool1.txt")
+	h_pool1_flat = my_reshape_flat (h_pool1, h_pool1_shape_2d[1])
+	matmul_result = my_matmul(h_pool1_flat, W_fc1)
+	b_fc1 = [0.1] * 4
+	h_fc1 = my_relu_2d(matmul_result + b_fc1)
+	W_write_2d(h_fc1, [1, 4], "data_small/h_fc1_my.txt")
+	"""
+	
+	
 
 #}}}
 
 elif TF == 4:
 #{{{
 
-	#大实验
+	#大实验,但是用我自己的函数
 	#conv 1
 	"""
-	W_conv1 = W_read(W1_shape, "data_orig/W_conv1.txt")	
-	x_image = W_read(x_shape, "data_orig/x_image.txt")	
+	W_conv1 = W_read_4d(W1_shape, "data_orig/W_conv1.txt")	
+	x_image = W_read_4d(x_shape, "data_orig/x_image.txt")	
 	result = my_conv2d (x_image, W_conv1)
-	W_write(result, conv1_shape, "data_orig/conv1_my.txt" )
+	W_write_4d(result, conv1_shape, "data_orig/conv1_my.txt" )
 	"""
 	
 	#h_conv1 
 	"""
 	b_conv1 = [0.1] * 32
-	conv_result = W_read (conv_shape, "data_orig/conv1_my.txt")
-	h_conv1 = my_relu(conv_result + b_conv1)
-	W_write(h_conv1, conv1_shape, "data_orig/h_conv1_my.txt" )
+	conv_result = W_read_4d (conv_shape, "data_orig/conv1_my.txt")
+	h_conv1 = my_relu_4d(conv_result + b_conv1)
+	W_write_4d(h_conv1, conv1_shape, "data_orig/h_conv1_my.txt" )
 	"""
 	
 	#pool1
 	"""
-	h_conv1 = W_read (conv1_shape, "data_orig/h_conv1_my.txt")
+	h_conv1 = W_read_4d (conv1_shape, "data_orig/h_conv1_my.txt")
 	h_pool1 = my_pool_2x2(h_conv1)
-	W_write(h_pool1, h_pool1_shape , "data_orig/h_pool1_my.txt" )
+	W_write_4d(h_pool1, h_pool1_shape , "data_orig/h_pool1_my.txt" )
 	"""
 	
 	#conv2 
 	"""
-	W_conv2 = W_read(W2_shape, "data_orig/W_conv2.txt")	
-	h_pool1 = W_read(h_pool1_shape, "data_orig/h_pool1_my.txt")	
+	W_conv2 = W_read_4d(W2_shape, "data_orig/W_conv2.txt")	
+	h_pool1 = W_read_4d(h_pool1_shape, "data_orig/h_pool1_my.txt")	
 	result = my_conv2d(h_pool1, W_conv2)
-	W_write(result, conv2_shape, "data_orig/conv2_my.txt" )
+	W_write_4d(result, conv2_shape, "data_orig/conv2_my.txt" )
 	"""
 	
 	#h_conv2
 	"""
 	b_conv2 = [0.1] * 64 
-	conv_result = W_read (conv2_shape, "data_orig/conv2_my.txt")
-	h_conv2 = my_relu(conv_result + b_conv2)
-	W_write(h_conv2, conv2_shape, "data_orig/h_conv2_my.txt" )
+	conv_result = W_read_4d (conv2_shape, "data_orig/conv2_my.txt")
+	h_conv2 = my_relu_4d(conv_result + b_conv2)
+	W_write_4d(h_conv2, conv2_shape, "data_orig/h_conv2_my.txt" )
 	"""
 
 	#pool2
 	"""
-	h_conv2 = W_read (conv2_shape, "data_orig/h_conv2_my.txt")
+	h_conv2 = W_read_4d (conv2_shape, "data_orig/h_conv2_my.txt")
 	h_pool2 = my_pool_2x2(h_conv2)
-	W_write(h_pool2, h_pool2_shape , "data_orig/h_pool2_my.txt" )
+	W_write_4d(h_pool2, h_pool2_shape , "data_orig/h_pool2_my.txt" )
 	"""
 
+	"""
+	W_fc1 = W_read_2d (W_fc1_shape, "data_orig/W_fc1.txt")
+	h_pool2 = W_read_4d (h_pool2_shape, "data_orig/h_pool2.txt")
+	h_pool2_flat = my_reshape_flat(h_pool2, 7*7*64)
+	
+	matmul_result = my_matmul(h_pool2_flat, W_fc1)
+	b_fc1 = [0.1] * 1024
+	
+	h_fc1 = my_relu_2d(matmul_result + b_fc1)
+	W_write_2d(h_fc1, [1, 1024], "data_orig/h_fc1_my.txt")
+	"""
 
 	
-	print ("compare")
-	compare_result = two_file_compare ("data_orig/h_pool2_my.txt", "data_orig/h_pool2.txt", h_pool2_shape )
-	print (compare_result)
 
 #}}}
 
 else:
 	print ("compare")
-	result = two_file_compare ("data_orig/h_pool1_my.txt", "data_orig/h_pool1.txt", [1, 3, 3, 4])
+	result = two_file_compare ("data_orig/h_fc1_my.txt", "data_orig/h_fc1.txt", [1, 1, 1, 1024])
 	print (result)
+	#h_fc1的size是1×1024，如果compare，要用size为[1,1,1,1024]
+
+
+
+
 
