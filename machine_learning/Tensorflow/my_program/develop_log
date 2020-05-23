@@ -60,4 +60,10 @@
 5/12
 	全连接层完成，下一步要搞dropout
 
+5/17
+	Dropout 的意思是，我先写一个keep_prob，就是保留的比例。比如，我要drop 0,那么keep_prob就是1.0,这是my_program里的东西。
+	Dropout的过程就是，我选好了keep_prob, 然后用h_fc1里的每个数，除以这个drop_prob就得到相应的dropout后的数了。
+	例如，h_fc1的第一个数是3.63,假如keep_prob是0.5,h_fc1_drop第一个数是7.268。
+	h_fc1第二个数是0.708,假如keep_prob是0.75,h_fc1_drop第二个数是0.944 （0.708 / 0.75）
+	值得注意的是，keep_prob是0.25时，很多数被变成了0，机制暂时不明.
 

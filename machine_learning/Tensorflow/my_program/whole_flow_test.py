@@ -12,7 +12,7 @@ import numpy as np
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 
-TF = 0 
+TF = 1 
 
 def weight_variable(shape):
 #{{{
@@ -294,6 +294,20 @@ def my_matmul(x, y):
 	return result	
 #}}}
 
+def my_dropout(x, keep_prob):
+#{{{
+	x_row = len(x)
+	x_col = len(x[0])
+	result = np.zeros([x_row, x_col])
+	
+	for x_row_pos in range (x_row):
+		row_tmp = np.zeros(x_col)
+		for x_col_pos in range (x_col):
+			row_tmp[x_col_pos] = x[x_row_pos][x_col_pos] / keep_prob
+		result[x_row_pos] = row_tmp
+	return result
+#}}}
+
 def my_reshape_flat (x, reshape_shape):
 #{{{
 	#现在我只能做成全平，但是输出的是[1, reshape_shape]的二维数组 
@@ -321,7 +335,8 @@ conv2_shape = [1,14,14,64] #也是h_conv2的shape
 h_pool1_shape = [1, 14, 14, 32]
 h_pool2_shape = [1, 7, 7, 64]
 W_fc1_shape = [7* 7* 64, 1024]
-
+W_fc2_shape = [1024, 10]
+y_shape = [1, 10]
 
 if TF == 1:
 #{{{
@@ -336,12 +351,13 @@ if TF == 1:
 	#b_conv2 = bias_variable([64])
 	
 	#W_fc1 = weight_variable(W_fc1_shape)
-	b_fc1 = bias_variable([1024])
+	#b_fc1 = bias_variable([1024])
 
+	#W_fc2 = weight_variable(W_fc2_shape)
+	b_fc2 = bias_variable([10])
 
-	x = tf.placeholder(tf.float32, [None, 784])
-	x_image = tf.reshape(x, x_shape)
-
+	#x = tf.placeholder(tf.float32, [None, 784])
+	#x_image = tf.reshape(x, x_shape)
 
 	#sess声明以后后面就只剩下run了
 	#有一种办法是一边画图一边run，但是run里面必须有feed_dict, 要不然出错！
@@ -427,6 +443,8 @@ if TF == 1:
 	W_write_2d(result, W_fc1_shape, "data_orig/W_fc1.txt" )
 	"""
 
+	#h_fc1
+	"""	
 	W_fc1 = W_read_2d (W_fc1_shape, "data_orig/W_fc1.txt")
 	h_pool2 = W_read_4d (h_pool2_shape, "data_orig/h_pool2.txt")
 	h_pool2_flat = tf.reshape(h_pool2, [-1, 7*7*64])
@@ -434,9 +452,32 @@ if TF == 1:
 	h_fc1 = tf.nn.relu(tf.matmul(h_pool2_flat, W_fc1) + b_fc1)
 	result = sess.run(h_fc1)
 	W_write_2d(result, [1, 1024], "data_orig/h_fc1.txt")
+	"""	
 	
+	#keep_prob
+	#keep_prob = 1.0	
+	#keep_prob = 0.75	
 
-	
+	#dropout
+	"""
+	h_fc1 = W_read_2d ([1, 1024], "data_orig/h_fc1.txt")
+	h_fc1_drop = tf.nn.dropout(h_fc1, keep_prob)
+	result = sess.run(h_fc1_drop)
+	W_write_2d(result, [1, 1024], "data_orig/h_fc1_drop.txt")
+	"""
+
+	#W_fc2
+	"""
+	result = sess.run (W_fc2)
+	W_write_2d(result, W_fc2_shape, "data_orig/W_fc2.txt" )
+	"""
+
+	#y	
+	W_fc2 = W_read_2d (W_fc2_shape, "data_orig/W_fc2.txt")
+	h_fc1_drop = W_read_2d([1, 1024], "data_orig/h_fc1_drop.txt")
+	y_conv = tf.matmul(h_fc1_drop, W_fc2) + b_fc2
+	result = sess.run(y_conv)	
+	W_write_2d(result, y_shape, "data_orig/y.txt" )
 
 	sess.close()
 #}}}
@@ -628,6 +669,7 @@ elif TF == 4:
 	W_write_4d(h_pool2, h_pool2_shape , "data_orig/h_pool2_my.txt" )
 	"""
 
+	#h_fc1
 	"""
 	W_fc1 = W_read_2d (W_fc1_shape, "data_orig/W_fc1.txt")
 	h_pool2 = W_read_4d (h_pool2_shape, "data_orig/h_pool2.txt")
@@ -639,8 +681,12 @@ elif TF == 4:
 	h_fc1 = my_relu_2d(matmul_result + b_fc1)
 	W_write_2d(h_fc1, [1, 1024], "data_orig/h_fc1_my.txt")
 	"""
-
 	
+	#dropout
+	keep_prob = 1.0	
+	h_fc1 = W_read_2d ([1, 1024], "data_orig/h_fc1_my.txt")
+	result = my_dropout(h_fc1, keep_prob)	
+	W_write_2d(result, [1, 1024], "data_orig/h_fc1_drop_my.txt")
 
 #}}}
 
