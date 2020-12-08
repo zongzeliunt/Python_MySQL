@@ -33,6 +33,65 @@ class bitree ():
             return self
         #}}}
 
+    def delete (self, value):
+        #{{{
+        #delete的办法有点费解，我的办法就是找到要删的点和它上面的点，以及上面点的左右信息，然后把这个要删的点一点一点下旋移动到叶子。同时还要保留它上面点的信息。
+        #这个旋转过程要左右左右来保证不会出现balance大于2的情况。
+        #当要删的点到叶子以后，删掉它，所谓的删掉就是把上面点的左或右指针变None。
+        #当删完以后，这个树肯定不平了，就还要再让树做一次平衡。反正这个树不存在balance大于2的情况，肯定能平衡。
+        p = self
+        head = self
+        sup_p = None
+        sup_lr = None
+        while True:
+            if p.value == value:
+                break
+            elif p.value > value and p.left != None:
+                sup_p = p
+                sup_lr = "l"
+                p = p.left
+            elif p.value < value and p.right != None:
+                sup_p = p
+                sup_lr = "r"
+                p = p.right
+            else:
+                #cannot find
+                return head
+
+
+        while p.left != None or p.right != None:
+            if sup_p == None:
+                #p is root
+                rot_result = p.right_rotate()
+                head = rot_result
+                sup_p = head 
+                sup_lr = "r"
+                p = sup_p.right
+            else:
+                if sup_lr == "r":
+                    rot_result = p.left_rotate()
+                    sup_p.right = rot_result
+                    sup_p = rot_result
+                    sup_lr = "l"
+                    p = sup_p.left
+                elif sup_lr == "l":
+                    rot_result = p.right_rotate()
+                    sup_p.left = rot_result
+                    sup_p = rot_result
+                    sup_lr = "r"
+                    p = sup_p.right
+
+
+
+        if sup_lr == "l":
+            sup_p.left = None
+        elif sup_lr == "r":
+            sup_p.right = None
+   
+
+        return head.self_balancing()
+        #}}}
+
     def update_height(self):
         #{{{
         if self.right == None:
@@ -52,6 +111,7 @@ class bitree ():
         #}}}
    
     def self_balancing (self):
+        #{{{
         if self.balance == -2 and self.left.balance <= -1:
             #LL
             return self.right_rotate()
@@ -75,6 +135,7 @@ class bitree ():
             return self.left_rotate()
         else:
             return self
+        #}}}
 
     def right_rotate (self):
         #{{{
@@ -230,5 +291,9 @@ head = head.insert(66)
 
 print (head.height)
 print (head.balance)
+head.level_traversal()
 
+head=head.delete(66)
+#head = head.right_rotate()
+head.level_traversal()
 
