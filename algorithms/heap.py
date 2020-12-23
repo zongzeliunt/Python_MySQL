@@ -4,7 +4,7 @@ def max_heap (arr, start, end):
     while (son <= end):
         if son + 1 <= end and arr[son + 1] > arr[son]:
             son += 1
-            #this is find the most big son
+            #this is find the most big son from two sons
         if arr[son] < arr[dad]:
             #dad is bigger than two son
             return
@@ -17,38 +17,19 @@ def max_heap (arr, start, end):
 
 def heap_sort(arr):
     length = len(arr) - 1
-    mid = length / 2
+    mid = length // 2
     for i in range (mid, -1 , -1):
+        #make the whole tree a max heap tree
+        #only work on the first half, 因为后半段是叶子节点，在叶子上做大顶堆也没意义
         max_heap(arr, i, length)
 
     for i in range (length, -1 , -1):
+        #list的0位是大顶堆的顶，所有数里的最大，弄到最后去
         list_swap(arr, 0, i)
+        #剩下的数再做一次大顶堆
         max_heap(arr, 0, i - 1)
+        #下一轮把顶放到倒数第二位，以此类推
     
-    
-def quick_sort (arr, start, end):
-    if start >= end: 
-        return
-    base = arr[end]
-    left = start
-    right = end - 1
-    while (left < right):
-        while arr[right] >= base:
-            right = right - 1
-        while arr[left] < base:
-            left = left + 1
-        list_swap (arr, right, left)
-    if (arr[left] >= arr[end]): 
-        list_swap (arr, left, end)
-    else:
-        left = left + 1
-    quick_sort (arr, start, left - 1)
-    quick_sort (arr, left + 1, end)
-
-
-
-
-
     
 def list_swap(arr, pos_0, pos_1):
     tmp = arr[pos_0]
@@ -57,14 +38,9 @@ def list_swap(arr, pos_0, pos_1):
 
 
 arr = [3,5,3,0,8, 6,1,5,8,6, 2,4,9,4,7, 0,1,8,9,7, 3,1,2,5,9, 7,4,0,2,6]
-#heap_sort(arr)
-
-quick_sort(arr, 0, len(arr) - 1)
+heap_sort(arr)
 
 
-
-
-
-print arr
+print (arr)
 
 
