@@ -47,13 +47,17 @@ class Solution:
                 else:
                     up = matrix[i-1][j]
 
-                if left == 1 and up == 0:
+                mark = 0
+
+                if left == 1:
                     if s3[s3_pos] == s2[s2_pos]:
-                        matrix[i][j] = 1
-                elif up == 1 and left == 0:
+                        mark = 1
+
+                if up == 1:
                     if s3[s3_pos] == s1[s1_pos]:
-                        matrix[i][j] = 1
-                elif up == 1 and left == 1:
+                        mark = 1
+
+                if mark == 1:    
                     matrix[i][j] = 1
                 
 
